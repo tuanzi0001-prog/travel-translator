@@ -1,0 +1,433 @@
+/* app.wxss —— 全局样式与设计系统（柔和新拟态 Soft Neumorphism · 生活化蓝） */
+page {
+  --ink: #2b3a59;
+  --ink-strong: #1e2c49;
+  --muted: #93a1bd;
+  --line: rgba(120, 150, 200, 0.16);
+
+  --blue: #4b8df8;
+  --blue-deep: #2f6fe0;
+  --blue-grad: linear-gradient(135deg, #6aa6ff 0%, #4180f2 100%);
+  --blue-soft: #edf3ff;
+  --blue-tint: rgba(75, 141, 248, 0.1);
+
+  --coral: #ff7d5e;
+  --coral-soft: #fff1ec;
+  --coral-grad: linear-gradient(135deg, #ffa17e, #ff6f4d);
+
+  --card: #ffffff;
+  --radius: 38rpx;
+  --radius-sm: 26rpx;
+
+  /* 新拟态柔和投影：下方扩散大阴影 + 贴近小阴影 + 顶部内高光 */
+  --shadow: 0 18rpx 46rpx rgba(74, 116, 196, 0.14), 0 4rpx 12rpx rgba(74, 116, 196, 0.06);
+  --shadow-sm: 0 10rpx 24rpx rgba(74, 116, 196, 0.13);
+  --shadow-blue: 0 18rpx 40rpx rgba(63, 126, 240, 0.32);
+  --inner-light: inset 0 2rpx 0 rgba(255, 255, 255, 0.9);
+
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  /* 干净通透的背景：顶部留白上扬 + 一抹淡蓝光晕 */
+  background:
+    radial-gradient(120% 55% at 50% -12%, #ffffff 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(90% 50% at 100% 2%, rgba(168, 196, 255, 0.4), transparent 55%),
+    linear-gradient(180deg, #eef3fe 0%, #e8f0fc 48%, #e0eafb 100%);
+  background-attachment: fixed;
+}
+
+view,
+text,
+textarea,
+button,
+image,
+scroll-view {
+  box-sizing: border-box;
+}
+
+/* ---------- 白色新拟态卡片 ---------- */
+.glass {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- 顶部栏 ---------- */
+.topbar {
+  padding: 0 40rpx 22rpx;
+  position: relative;
+}
+.brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24rpx;
+}
+.brand .welcome {
+  display: block;
+  font-size: 24rpx;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.3rpx;
+}
+.brand .title {
+  display: block;
+  margin-top: 4rpx;
+  font-size: 50rpx;
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -1.2rpx;
+  color: var(--ink-strong);
+}
+.page-sub {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: var(--muted);
+  font-weight: 600;
+}
+.avatar {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(150deg, #eaf2ff 0%, #d6e6ff 100%);
+  box-shadow: var(--shadow-sm), inset 0 2rpx 4rpx rgba(255, 255, 255, 0.9);
+  flex: 0 0 auto;
+}
+.avatar-emoji {
+  font-size: 50rpx;
+  line-height: 1;
+}
+.avatar-hover {
+  transform: scale(0.92);
+}
+
+/* 「我的」页左上返回 */
+.top-back {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+  height: 72rpx;
+  padding: 0 30rpx 0 20rpx;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--blue-deep);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  flex: 0 0 auto;
+}
+.top-back-hover {
+  transform: scale(0.94);
+}
+.title-left {
+  font-size: 42rpx;
+  font-weight: 800;
+  color: var(--ink-strong);
+}
+
+/* ---------- 语言切换 ---------- */
+.language-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 30rpx;
+}
+.language-pill {
+  flex: 1;
+  min-width: 0;
+  height: 96rpx;
+  border-radius: 28rpx;
+  padding: 0 24rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 29rpx;
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+.language-pill .flag {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  background: var(--blue-soft);
+  flex: 0 0 auto;
+}
+.language-pill .lang-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.swap {
+  flex: 0 0 auto;
+  width: 84rpx;
+  height: 84rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--blue-grad);
+  box-shadow: var(--shadow-blue);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.swap.spin {
+  transform: rotate(180deg);
+}
+
+/* ---------- 区块标题 ---------- */
+.section-title {
+  margin: 44rpx 8rpx 22rpx;
+  font-size: 33rpx;
+  font-weight: 800;
+  letter-spacing: -0.6rpx;
+  color: var(--ink-strong);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.section-title .st-left {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+.section-title .st-dot {
+  width: 14rpx;
+  height: 30rpx;
+  border-radius: 999rpx;
+  background: var(--blue-grad);
+  flex: 0 0 auto;
+}
+.section-title .more {
+  font-size: 24rpx;
+  color: var(--blue);
+  font-weight: 700;
+}
+
+/* ---------- 分类芯片 ---------- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+.chip {
+  min-height: 70rpx;
+  border-radius: 999rpx;
+  padding: 14rpx 28rpx;
+  color: var(--ink);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  font-size: 26rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.chip .chip-emoji {
+  margin-right: 8rpx;
+  font-size: 26rpx;
+  line-height: 1;
+}
+/* 选中态背景色由各分类主题色经内联 style 注入 */
+.chip.active {
+  color: #fff;
+}
+.chip-hover {
+  transform: scale(0.93);
+}
+
+/* ---------- 短语 / 译文列表行 ---------- */
+.phrase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+.phrase-row {
+  display: flex;
+  align-items: center;
+  gap: 22rpx;
+  border-radius: var(--radius-sm);
+  padding: 26rpx 24rpx;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+/* 双旗叠放徽标（源语 → 目标语） */
+.flag-badge {
+  position: relative;
+  width: 86rpx;
+  height: 64rpx;
+  flex: 0 0 auto;
+}
+.flag-badge .fb {
+  position: absolute;
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27rpx;
+  background: #fff;
+  box-shadow: 0 4rpx 12rpx rgba(74, 116, 196, 0.22);
+  border: 3rpx solid #fff;
+}
+.flag-badge .fb-back {
+  left: 0;
+  top: 0;
+  background: var(--blue-soft);
+}
+.flag-badge .fb-front {
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+/* 单旗（拍照结果等） */
+.flag-chip {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  background: var(--blue-soft);
+  flex: 0 0 auto;
+}
+
+.phrase-row .pr-body {
+  flex: 1;
+  min-width: 0;
+}
+.phrase-row .pr-src {
+  display: block;
+  font-size: 29rpx;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ink-strong);
+}
+.phrase-row .pr-tgt {
+  display: block;
+  margin-top: 8rpx;
+  color: var(--muted);
+  font-size: 25rpx;
+  line-height: 1.4;
+}
+.pr-body-hover {
+  opacity: 0.6;
+}
+
+/* 圆形新拟态小按钮 */
+.icon-btn {
+  width: 74rpx;
+  height: 74rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: var(--blue-soft);
+}
+.icon-btn-hover {
+  transform: scale(0.88);
+}
+.icon-btn.play.speaking {
+  background: var(--blue-grad);
+  box-shadow: var(--shadow-blue);
+}
+.icon-btn.fav {
+  background: #f3f5fb;
+}
+.icon-btn.fav.faved {
+  background: var(--coral-grad);
+  box-shadow: 0 12rpx 28rpx rgba(255, 111, 77, 0.34);
+}
+
+/* ---------- 主 / 次按钮 ---------- */
+.primary-button {
+  flex: 1;
+  height: 96rpx;
+  border-radius: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  color: #fff;
+  font-weight: 800;
+  font-size: 30rpx;
+  letter-spacing: 1rpx;
+  background: var(--blue-grad);
+  box-shadow: var(--shadow-blue);
+}
+.primary-button-hover {
+  transform: translateY(3rpx) scale(0.99);
+  box-shadow: 0 10rpx 26rpx rgba(63, 126, 240, 0.3);
+}
+.primary-button.loading {
+  opacity: 0.94;
+}
+.secondary-button {
+  width: 96rpx;
+  height: 96rpx;
+  flex: 0 0 auto;
+  border-radius: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+.secondary-button-hover {
+  transform: scale(0.9);
+}
+
+/* 加载三点 */
+.dots {
+  display: flex;
+  gap: 8rpx;
+  align-items: center;
+}
+.dots .dot {
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  background: #fff;
+  animation: dotbounce 1s infinite ease-in-out;
+}
+.dots .dot:nth-child(2) { animation-delay: 0.15s; }
+.dots .dot:nth-child(3) { animation-delay: 0.3s; }
+@keyframes dotbounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ---------- 空状态 ---------- */
+.empty {
+  margin-top: 24rpx;
+  padding: 70rpx 40rpx;
+  text-align: center;
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+.empty .empty-emoji {
+  font-size: 72rpx;
+  line-height: 1;
+}
+.empty .empty-text {
+  display: block;
+  margin-top: 22rpx;
+  color: var(--muted);
+  font-size: 26rpx;
+  line-height: 1.6;
+}

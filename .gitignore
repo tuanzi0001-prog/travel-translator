@@ -1,0 +1,12 @@
+# 系统
+.DS_Store
+
+# 微信开发者工具本地私有配置（每台机器各自生成，不入库）
+project.private.config.json
+
+# Claude Code 本地配置
+.claude/
+
+# 依赖与构建产物
+node_modules/
+miniprogram_npm/

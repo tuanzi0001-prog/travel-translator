@@ -1,0 +1,68 @@
+<view class="page">
+  <!-- 顶部：返回 + 标题 -->
+  <view class="topbar" style="padding-top:{{statusBarHeight}}px;">
+    <view class="brand-row" style="min-height:{{navBarHeight}}px;padding-right:{{capsuleRight}}px;">
+      <view class="top-back" bindtap="goBack" hover-class="top-back-hover" hover-stay-time="80">
+        <icon name="chevron-left" size="36" color="#2f6fe0"></icon><text>返回</text>
+      </view>
+      <text class="title title-left">我的</text>
+    </view>
+  </view>
+
+  <view class="body" style="padding-bottom:{{bodyPadBottom}}px;">
+    <!-- 资料卡 -->
+    <view class="glass profile-card">
+      <view class="p-avatar"><text class="p-avatar-emoji">😎</text></view>
+      <view class="p-info">
+        <text class="p-name">出行翻译用户</text>
+        <text class="p-meta">随身翻译 · 让旅途更安心 ✈️</text>
+      </view>
+    </view>
+
+    <!-- 统计 -->
+    <view class="stat-row">
+      <view class="stat">
+        <text class="stat-num c-coral">{{favCount}}</text>
+        <text class="stat-label">收藏短语</text>
+      </view>
+      <view class="stat">
+        <text class="stat-num c-blue">{{translateCount}}</text>
+        <text class="stat-label">翻译次数</text>
+      </view>
+      <view class="stat">
+        <text class="stat-num c-teal">{{phraseCount}}</text>
+        <text class="stat-label">常用短语</text>
+      </view>
+    </view>
+
+    <!-- 收藏 -->
+    <view class="section-title">
+      <view class="st-left"><view class="st-dot"></view><text>我的收藏</text></view>
+      <text class="more" wx:if="{{favorites.length}}" bindtap="clearAll">清空</text>
+    </view>
+
+    <view class="phrase-list" wx:if="{{favorites.length}}">
+      <view class="phrase-row" wx:for="{{favorites}}" wx:key="src">
+        <view class="flag-badge">
+          <text class="fb fb-back">{{item.fromFlag}}</text>
+          <text class="fb fb-front">{{item.flag}}</text>
+        </view>
+        <view class="pr-body">
+          <text class="pr-src">{{item.src}}</text>
+          <text class="pr-tgt">{{item.tgt}}</text>
+        </view>
+        <view class="icon-btn play {{speakingSrc === item.src ? 'speaking' : ''}}" data-src="{{item.src}}" data-tgt="{{item.tgt}}" data-lang="{{item.lang}}" catchtap="onSpeak" hover-class="icon-btn-hover" hover-stay-time="80">
+          <icon name="volume-2" size="36" color="{{speakingSrc === item.src ? '#ffffff' : '#2f6fe0'}}"></icon>
+        </view>
+        <view class="icon-btn fav faved" data-src="{{item.src}}" data-tgt="{{item.tgt}}" catchtap="onRemove" hover-class="icon-btn-hover" hover-stay-time="80">
+          <icon name="trash-2" size="34" color="#ffffff"></icon>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty" wx:else>
+      <text class="empty-emoji">❤️</text>
+      <text class="empty-text">{{emptyText}}</text>
+    </view>
+  </view>
+</view>

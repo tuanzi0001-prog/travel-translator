@@ -1,0 +1,37 @@
+<view class="voice-page" style="padding-top:{{statusBarHeight}}px;padding-bottom:{{safeBottom}}px;">
+  <!-- 顶部：返回 + 语向 -->
+  <view class="v-top">
+    <view class="imm-back" bindtap="goBack" hover-class="imm-back-hover" hover-stay-time="80">
+      <icon name="chevron-left" size="40" color="#2f6fe0"></icon>
+    </view>
+    <view class="v-langpill">
+      <text>{{fromLang.name}}</text>
+      <icon name="arrow-right" size="28" color="#4b8df8"></icon>
+      <text>{{toLang.name}}</text>
+    </view>
+    <view class="imm-spacer"></view>
+  </view>
+
+  <!-- 状态 -->
+  <view class="v-status">{{voiceStatus}}</view>
+
+  <!-- 原文 / 译文 -->
+  <view class="v-text">
+    <text class="vt-source">{{vtSource}}</text>
+    <text class="vt-target" bindtap="onReplay">{{vtTarget}}</text>
+  </view>
+
+  <!-- 底部：光晕 + 波形 + 麦克风 -->
+  <view class="v-bottom">
+    <view class="v-glow"></view>
+    <view class="waveform {{listening ? 'live' : ''}}">
+      <view class="bar" wx:for="{{bars}}" wx:key="*this"></view>
+    </view>
+    <view class="mic-stage {{listening ? 'listening' : ''}}">
+      <view class="record-button {{listening ? 'listening' : ''}}" bindtap="onRecordTap" hover-class="record-hover" hover-stay-time="80">
+        <icon name="mic" size="64" color="{{listening ? '#ffffff' : '#2f6fe0'}}"></icon>
+      </view>
+    </view>
+    <text class="record-hint">{{recordHint}}</text>
+  </view>
+</view>

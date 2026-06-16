@@ -1,0 +1,16 @@
+<view class="tabbar" style="bottom:{{safeBottom + 12}}px;">
+  <view class="tab" bindtap="onText" hover-class="tab-hover" hover-stay-time="80">
+    <icon name="keyboard" size="42" color="{{active === 'text' ? '#2f6fe0' : '#9aa7c2'}}"></icon>
+    <text class="tab-label {{active === 'text' ? 'on' : ''}}">文本</text>
+  </view>
+
+  <view class="tab center-tab" bindtap="onVoice" hover-class="center-hover" hover-stay-time="80">
+    <view class="fab"><icon name="mic" size="54" color="#ffffff"></icon></view>
+    <text class="center-label">语音</text>
+  </view>
+
+  <view class="tab" bindtap="onCamera" hover-class="tab-hover" hover-stay-time="80">
+    <icon name="camera" size="42" color="#9aa7c2"></icon>
+    <text class="tab-label">拍照</text>
+  </view>
+</view>

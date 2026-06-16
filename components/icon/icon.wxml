@@ -1,0 +1,7 @@
+<image
+  class="icon-img"
+  src="{{src}}"
+  style="width:{{size}}rpx;height:{{size}}rpx;"
+  mode="aspectFit"
+  show-menu-by-longpress="{{false}}"
+/>

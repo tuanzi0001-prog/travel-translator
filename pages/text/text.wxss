@@ -1,0 +1,221 @@
+.page {
+  min-height: 100vh;
+}
+.body {
+  padding: 0 40rpx;
+}
+
+/* 头像入口（带「我的」字样，更清楚是个人中心）
+   头像盒子参与对齐（与标题居中对齐），「我的」用绝对定位挂在头像下方，不影响对齐 */
+.avatar-entry {
+  position: relative;
+  flex: 0 0 auto;
+}
+.avatar-cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -26rpx;
+  text-align: center;
+  font-size: 20rpx;
+  font-weight: 700;
+  color: var(--muted);
+  line-height: 1;
+}
+
+/* 语言下拉 */
+.lang-select {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+.pill-hover {
+  opacity: 0.85;
+}
+.chev {
+  transition: transform 0.2s ease;
+}
+.chev.up {
+  transform: rotate(180deg);
+}
+.lang-dropdown {
+  position: absolute;
+  top: 108rpx;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 22rpx 54rpx rgba(74, 116, 196, 0.24);
+  padding: 8rpx;
+  z-index: 60;
+}
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  padding: 20rpx 18rpx;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--ink);
+}
+.lang-option .opt-flag {
+  font-size: 30rpx;
+}
+.lang-option.sel {
+  color: var(--blue-deep);
+  background: var(--blue-soft);
+}
+.lang-option-hover {
+  background: #f2f5fb;
+}
+.dropdown-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+}
+
+/* 输入卡 */
+.panel {
+  padding: 32rpx 30rpx;
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22rpx;
+}
+.ch-title {
+  font-size: 30rpx;
+  font-weight: 800;
+  color: var(--ink-strong);
+}
+.tag {
+  font-size: 22rpx;
+  color: var(--blue-deep);
+  font-weight: 700;
+  padding: 8rpx 20rpx;
+  border-radius: 999rpx;
+  background: var(--blue-soft);
+}
+
+.input-wrap {
+  position: relative;
+}
+.ta {
+  width: 100%;
+  height: 200rpx;
+  border-radius: var(--radius-sm);
+  padding: 26rpx 120rpx 26rpx 26rpx;
+  color: var(--ink-strong);
+  background: #f4f7fc;
+  box-shadow: inset 0 2rpx 8rpx rgba(74, 116, 196, 0.08);
+  line-height: 1.5;
+  font-size: 31rpx;
+  box-sizing: border-box;
+}
+.ta-placeholder {
+  color: #abb6cd;
+}
+.in-speak {
+  position: absolute;
+  right: 18rpx;
+  bottom: 18rpx;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  z-index: 2;
+}
+.in-speak.speaking {
+  background: var(--blue-grad);
+  box-shadow: var(--shadow-blue);
+}
+
+.action-row {
+  display: flex;
+  gap: 18rpx;
+  margin-top: 22rpx;
+}
+
+/* 译文强调子卡 */
+.result-box {
+  margin-top: 26rpx;
+  border-radius: var(--radius-sm);
+  padding: 28rpx;
+  background: linear-gradient(160deg, #f1f7ff 0%, #e9f1ff 100%);
+}
+.res-lang {
+  font-size: 23rpx;
+  font-weight: 800;
+  color: var(--blue-deep);
+  margin-bottom: 14rpx;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+.res-text {
+  display: block;
+  font-size: 38rpx;
+  line-height: 1.42;
+  font-weight: 800;
+  color: var(--ink-strong);
+}
+.res-hint {
+  display: block;
+  margin-top: 16rpx;
+  color: #7e8cab;
+  font-size: 24rpx;
+  line-height: 1.5;
+}
+.res-actions {
+  display: flex;
+  gap: 14rpx;
+  margin-top: 24rpx;
+  flex-wrap: wrap;
+}
+.ghost-chip {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  font-size: 24rpx;
+  font-weight: 700;
+  color: var(--blue-deep);
+  padding: 16rpx 26rpx;
+  border-radius: 999rpx;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.ghost-chip.faved {
+  color: var(--coral);
+  background: var(--coral-soft);
+}
+.ghost-chip.speaking {
+  color: var(--coral);
+}
+.ghost-chip-hover {
+  transform: scale(0.93);
+}
+
+.phrase-list-spaced {
+  margin-top: 4rpx;
+}
+
+.fav-empty {
+  margin-top: 6rpx;
+  padding: 56rpx 36rpx;
+  text-align: center;
+  color: var(--muted);
+  font-size: 25rpx;
+  line-height: 1.5;
+  background: var(--card);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}

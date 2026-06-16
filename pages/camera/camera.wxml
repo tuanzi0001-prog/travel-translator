@@ -1,0 +1,68 @@
+<view class="cam-page">
+  <!-- 实时取景 -->
+  <camera
+    wx:if="{{!camError}}"
+    class="cam-view"
+    device-position="back"
+    flash="off"
+    resolution="medium"
+    binderror="onCamError"
+  ></camera>
+
+  <!-- 未授权 / 不可用时的兜底 -->
+  <view class="cam-fallback" wx:else>
+    <icon name="camera" size="80" color="#ffffff"></icon>
+    <text class="fb-title">需要相机权限</text>
+    <text class="fb-text">授权后即可拍照翻译菜单、路牌、说明书；也可以直接从相册选择图片。</text>
+    <view class="fb-btn" bindtap="openSetting" hover-class="fb-btn-hover">去授权</view>
+  </view>
+
+  <!-- 顶部：返回 + 语向 -->
+  <view class="imm-top" style="top:{{statusBarHeight + 10}}px;">
+    <view class="imm-back" bindtap="goBack" hover-class="imm-back-hover" hover-stay-time="80">
+      <icon name="chevron-left" size="40" color="#ffffff"></icon>
+    </view>
+    <view class="imm-langpill">{{fromLang.name}}（识别）</view>
+  </view>
+
+  <!-- 扫描线 -->
+  <view class="cam-scan" wx:if="{{scanning}}"></view>
+
+  <!-- 底部控制（仅相机可用时显示，避免与授权页混在一起） -->
+  <view class="cam-bottom" wx:if="{{!camError}}" style="padding-bottom:{{safeBottom + 36}}px;">
+    <view class="cam-tip">对准菜单 / 路牌，按快门即可翻译</view>
+    <view class="cam-controls">
+      <view class="cam-side"></view>
+      <view class="shutter {{shooting ? 'shooting' : ''}}" bindtap="onShutter" hover-class="shutter-hover" hover-stay-time="60"></view>
+      <view class="cam-gallery" bindtap="onGallery" hover-class="gallery-hover" hover-stay-time="80">
+        <icon name="images" size="40" color="#ffffff"></icon>
+      </view>
+    </view>
+  </view>
+
+  <!-- 识别结果遮罩 + 卡片 -->
+  <view class="cam-mask" wx:if="{{showResult}}" bindtap="closeResult"></view>
+  <view class="cam-result {{showResult ? 'show' : ''}}">
+    <view class="grip"></view>
+    <view class="rh">
+      <text class="rh-title">识别结果 · {{results.length}} 段</text>
+      <view class="cls" bindtap="closeResult" hover-class="icon-btn-hover" hover-stay-time="80">
+        <icon name="x" size="34" color="#7488a8"></icon>
+      </view>
+    </view>
+    <view class="phrase-list">
+      <view class="phrase-row" wx:for="{{results}}" wx:key="id">
+        <view class="pr-body">
+          <text class="pr-src">{{item.src}}</text>
+          <text class="pr-tgt">{{item.tgt}}<text wx:if="{{item.note}}"> · {{item.note}}</text></text>
+        </view>
+        <view class="icon-btn play {{speakingId === item.id ? 'speaking' : ''}}" data-id="{{item.id}}" data-src="{{item.src}}" catchtap="onResultSpeak" hover-class="icon-btn-hover" hover-stay-time="80">
+          <icon name="volume-2" size="36" color="{{speakingId === item.id ? '#ffffff' : '#2f6fe0'}}"></icon>
+        </view>
+        <view class="icon-btn fav {{item.faved ? 'faved' : ''}}" data-src="{{item.src}}" data-tgt="{{item.tgt}}" catchtap="onResultFav" hover-class="icon-btn-hover" hover-stay-time="80">
+          <icon name="heart" size="34" color="{{item.faved ? '#ffffff' : '#7488a8'}}"></icon>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

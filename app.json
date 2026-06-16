@@ -1,0 +1,33 @@
+{
+  "pages": [
+    "pages/text/text",
+    "pages/voice/voice",
+    "pages/camera/camera",
+    "pages/mine/mine"
+  ],
+  "window": {
+    "backgroundColor": "#eaf1fe",
+    "backgroundColorTop": "#e8f0ff",
+    "backgroundColorBottom": "#e6edfb",
+    "backgroundTextStyle": "dark",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "出行翻译"
+  },
+  "usingComponents": {
+    "icon": "/components/icon/icon",
+    "nav-bar": "/components/nav-bar/nav-bar"
+  },
+  "permission": {
+    "scope.camera": {
+      "desc": "用于拍照翻译菜单、路牌、说明书等"
+    },
+    "scope.record": {
+      "desc": "用于语音翻译时录制您要翻译的语音"
+    }
+  },
+  "requiredPrivateInfos": [],
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

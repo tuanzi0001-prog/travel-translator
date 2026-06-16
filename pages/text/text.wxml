@@ -1,0 +1,146 @@
+<view class="page">
+  <!-- 顶部栏 -->
+  <view class="topbar" style="padding-top:{{statusBarHeight + navBarHeight + 10}}px;">
+    <view class="brand-row">
+      <view class="brand">
+        <text class="title">出行翻译</text>
+      </view>
+      <view class="avatar-entry" bindtap="goMine" hover-class="avatar-hover" hover-stay-time="80">
+        <view class="avatar"><text class="avatar-emoji">😎</text></view>
+        <text class="avatar-cap">我的</text>
+      </view>
+    </view>
+    <text class="page-sub">面向出国旅行的随身翻译</text>
+
+    <view class="language-row">
+      <view class="lang-select">
+        <view class="language-pill" bindtap="toggleFromDropdown" hover-class="pill-hover" hover-stay-time="80">
+          <text class="flag">{{fromLang.flag}}</text>
+          <text class="lang-name">{{fromLang.name}}</text>
+          <icon name="chevron-down" size="30" color="#7488a8" class="chev {{showFromDropdown ? 'up' : ''}}"></icon>
+        </view>
+        <view class="lang-dropdown" wx:if="{{showFromDropdown}}">
+          <view class="lang-option {{index === fromIndex ? 'sel' : ''}}" wx:for="{{languages}}" wx:key="code" data-idx="{{index}}" bindtap="onFromSelect" hover-class="lang-option-hover" hover-stay-time="60">
+            <text class="opt-flag">{{item.flag}}</text><text class="opt-name">{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="swap {{swapSpin ? 'spin' : ''}}" bindtap="onSwap" hover-class="secondary-button-hover" hover-stay-time="80">
+        <icon name="arrow-left-right" size="36" color="#ffffff"></icon>
+      </view>
+
+      <view class="lang-select">
+        <view class="language-pill" bindtap="toggleToDropdown" hover-class="pill-hover" hover-stay-time="80">
+          <text class="flag">{{toLang.flag}}</text>
+          <text class="lang-name">{{toLang.name}}</text>
+          <icon name="chevron-down" size="30" color="#7488a8" class="chev {{showToDropdown ? 'up' : ''}}"></icon>
+        </view>
+        <view class="lang-dropdown" wx:if="{{showToDropdown}}">
+          <view class="lang-option {{index === toIndex ? 'sel' : ''}}" wx:for="{{languages}}" wx:key="code" data-idx="{{index}}" bindtap="onToSelect" hover-class="lang-option-hover" hover-stay-time="60">
+            <text class="opt-flag">{{item.flag}}</text><text class="opt-name">{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 内容区 -->
+  <view class="body" style="padding-bottom:{{bodyPadBottom}}px;">
+    <!-- 输入卡 -->
+    <view class="glass panel">
+      <view class="card-head">
+        <text class="ch-title">输入要翻译的话</text>
+        <text class="tag">问路 · 点餐 · 购物</text>
+      </view>
+
+      <view class="input-wrap">
+        <textarea
+          class="ta"
+          value="{{sourceText}}"
+          bindinput="onInput"
+          placeholder="输入要翻译的话，例如：请问这附近有药店吗？"
+          placeholder-class="ta-placeholder"
+          maxlength="300"
+          adjust-position="{{true}}"
+        />
+        <view class="in-speak {{srcSpeaking ? 'speaking' : ''}}" catchtap="onSpeakSrc" hover-class="icon-btn-hover" hover-stay-time="80">
+          <icon name="volume-2" size="38" color="{{srcSpeaking ? '#ffffff' : '#2f6fe0'}}"></icon>
+        </view>
+      </view>
+
+      <view class="action-row">
+        <view class="primary-button {{translating ? 'loading' : ''}}" bindtap="onTranslate" hover-class="primary-button-hover" hover-stay-time="80">
+          <view wx:if="{{translating}}" class="dots">
+            <view class="dot"></view><view class="dot"></view><view class="dot"></view>
+          </view>
+          <block wx:else>
+            <icon name="languages" size="36" color="#ffffff"></icon>
+            <text>翻译</text>
+          </block>
+        </view>
+      </view>
+
+      <!-- 译文结果 -->
+      <view class="result-box">
+        <view class="res-lang">
+          <icon name="sparkles" size="26" color="#4b8df8"></icon>
+          <text>{{resultLangLabel}}</text>
+        </view>
+        <text class="res-text" bindtap="onSpeakRes">{{result.text}}</text>
+        <text class="res-hint" wx:if="{{result.note}}">{{result.note}}</text>
+        <view class="res-actions">
+          <view class="ghost-chip {{resSpeaking ? 'speaking' : ''}}" catchtap="onSpeakRes" hover-class="ghost-chip-hover" hover-stay-time="80">
+            <icon name="volume-2" size="26" color="{{resSpeaking ? '#ff7a5c' : '#2f6fe0'}}"></icon><text>朗读译文</text>
+          </view>
+          <view class="ghost-chip" catchtap="onCopy" hover-class="ghost-chip-hover" hover-stay-time="80">
+            <icon name="copy" size="26" color="#2f6fe0"></icon><text>复制</text>
+          </view>
+          <view class="ghost-chip {{resFaved ? 'faved' : ''}}" catchtap="onToggleResFav" hover-class="ghost-chip-hover" hover-stay-time="80">
+            <icon name="heart" size="26" color="{{resFaved ? '#ff7a5c' : '#2f6fe0'}}"></icon><text>{{resFaved ? '已收藏' : '收藏'}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 常用短语 -->
+    <view class="section-title">
+      <view class="st-left"><view class="st-dot"></view><text>常用短语</text></view>
+    </view>
+    <view class="chips">
+      <view
+        wx:for="{{chips}}"
+        wx:key="name"
+        class="chip {{item.name === activeCat ? 'active' : ''}}"
+        style="{{item.name === activeCat ? 'background:' + item.color + ';' : ''}}"
+        data-cat="{{item.name}}"
+        bindtap="onCatTap"
+        hover-class="chip-hover"
+        hover-stay-time="80"
+      ><text class="chip-emoji">{{item.emoji}}</text>{{item.name}}</view>
+    </view>
+
+    <view class="phrase-list phrase-list-spaced" wx:if="{{phraseList.length}}">
+      <view class="phrase-row" wx:for="{{phraseList}}" wx:key="src">
+        <view class="flag-badge">
+          <text class="fb fb-back">{{item.fromFlag}}</text>
+          <text class="fb fb-front">{{item.toFlag}}</text>
+        </view>
+        <view class="pr-body" data-src="{{item.src}}" data-tgt="{{item.tgt}}" data-lang="{{item.lang}}" bindtap="onPhraseTap" hover-class="pr-body-hover" hover-stay-time="80">
+          <text class="pr-src">{{item.src}}</text>
+          <text class="pr-tgt">{{item.tgt}}</text>
+        </view>
+        <view class="icon-btn play {{speakingSrc === item.src ? 'speaking' : ''}}" data-src="{{item.src}}" data-tgt="{{item.tgt}}" data-lang="{{item.lang}}" catchtap="onPhraseSpeak" hover-class="icon-btn-hover" hover-stay-time="80">
+          <icon name="volume-2" size="36" color="{{speakingSrc === item.src ? '#ffffff' : '#2f6fe0'}}"></icon>
+        </view>
+        <view class="icon-btn fav {{item.faved ? 'faved' : ''}}" data-src="{{item.src}}" data-tgt="{{item.tgt}}" data-from="{{item.fromCode}}" data-lang="{{item.lang}}" catchtap="onPhraseFav" hover-class="icon-btn-hover" hover-stay-time="80">
+          <icon name="heart" size="34" color="{{item.faved ? '#ffffff' : '#7488a8'}}"></icon>
+        </view>
+      </view>
+    </view>
+    <view class="fav-empty" wx:elif="{{favCatActive}}">还没有收藏，翻译结果或短语点一下 ♡ 就能加到这里</view>
+  </view>
+
+  <view class="dropdown-mask" wx:if="{{showFromDropdown || showToDropdown}}" catchtap="closeDropdowns"></view>
+  <nav-bar active="text" safeBottom="{{safeBottom}}"></nav-bar>
+</view>
